@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="logo.png" width="200" alt="logo">
+</div>
+
 # astrbot_plugin_netease_together
 
 让 AstrBot 接入网易云**官方双人「一起听」**：读出正在听的歌和完整歌词，并在你明确授权时暂停、继续、切歌、插播、退出。
@@ -29,17 +33,31 @@ Cove 需在 AstrBot 可访问的内网中监听 8787，**不要映射到公网**
 
 ## 安装
 
-1. 把本目录打包成标准 AstrBot 插件 ZIP 并上传安装，或直接放入 `data/plugins/`
-2. 在 AstrBot 插件配置页填写：
+本仓库根目录即插件目录，可直接作为 AstrBot 插件使用。
+
+```bash
+cd AstrBot/data/plugins
+git clone https://github.com/HaruPuny/astrbot_plugin_netease_together.git
+```
+
+或把本仓库打包成 ZIP 后通过 AstrBot 插件页上传安装。
+
+安装后在插件配置页填写：
+
    - `platform_id`：你的 QQ 平台 ID（留空则跳过该校验）
    - `owner_umo`：形如 `<platform_id>:FriendMessage:<主人QQ号>`；也可留空并依赖 `master_aware` 的主人 QQ 列表
    - `owner_netease_uid`：你的网易云数字 UID
    - `bridge_url`：内网地址，默认 `http://cove:8787/mcp/music`，路径固定且仅接受私有地址
    - `bridge_token_file`：容器内令牌文件的绝对路径
-3. 把同一份令牌写入 `bridge_token_file` 指向的文件（权限 600）
-4. 填好之后再打开 `enabled`
+
+然后：
+
+1. 把同一份令牌写入 `bridge_token_file` 指向的文件（权限 600）
+2. 填好之后再打开 `enabled`
 
 `requirements.txt` 声明的 `mcp` 与 `httpx` 通常已由 AstrBot 运行时提供，无需为插件升级框架依赖。
+
+`cove-compose.example.yml` 是一份参考用的 Cove 部署配置，按需修改后使用，不是本插件的自动安装脚本。
 
 ## 使用
 
