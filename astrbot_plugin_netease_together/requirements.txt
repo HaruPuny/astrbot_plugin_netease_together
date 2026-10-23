@@ -1,0 +1,3 @@
+# Already provided by the current AstrBot runtime; do not pip-upgrade the bot.
+mcp>=1.30.0,<2
+httpx>=0.27,<1

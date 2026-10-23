@@ -1,0 +1,11 @@
+{
+  "enabled": {"description": "启用网易云一起听接入", "type": "bool", "default": false, "hint": "需要先自行部署 Cove 桥接服务、准备机器人网易云账号 Cookie 与桥接令牌，再手动启用。"},
+  "platform_id": {"description": "QQ 平台 ID", "type": "string", "default": "", "hint": "填写你的 AstrBot 平台 ID，例如 qq_abc。可在 AstrBot 平台配置页查看。"},
+  "owner_umo": {"description": "主人私聊会话 UMO", "type": "string", "default": "", "hint": "形如 <platform_id>:FriendMessage:<主人QQ号>。留空则仅依赖 master_aware 的主人 QQ 列表校验。"},
+  "owner_netease_uid": {"description": "主人的网易云 UID", "type": "string", "default": "", "hint": "数字 UID，不是 QQ 号，也不是机器人自己的网易云账号。必须与 Cove 的 NETEASE_INVITER_UID 保持一致，否则拒绝加入邀请。"},
+  "bridge_url": {"description": "Cove 内网 MCP 地址", "type": "string", "default": "http://cove:8787/mcp/music", "hint": "必须是内网可解析的主机名、私有 IP 或 localhost，路径固定为 /mcp/music，不允许公网地址。"},
+  "bridge_token_file": {"description": "桥接令牌文件路径", "type": "string", "default": "/AstrBot/data/plugin_data/astrbot_plugin_netease_together/bridge-token", "hint": "填写 AstrBot 容器内的绝对路径；令牌内容需与 Cove 的 BRIDGE_TOKEN_FILE 一致，不会进入配置界面、模型或日志。"},
+  "request_timeout_seconds": {"description": "单次音乐请求超时秒数", "type": "int", "default": 25, "hint": "10–60 秒；写操作超时后不会自动重试。"},
+  "max_lyrics_chars": {"description": "歌词读取总字符上限", "type": "int", "default": 20000, "hint": "1000–60000；超限会返回 truncated 标记，不能据此宣称已读完。"},
+  "command_display_chars": {"description": "QQ 纯文字指令结果展示上限", "type": "int", "default": 3500, "hint": "500–10000；仅影响 QQ 展示，与模型可读的歌词上限相互独立，截断会明确提示。"}
+}

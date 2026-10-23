@@ -1,0 +1,60 @@
+# 示例：为 astrbot_plugin_netease_together 部署 Cove 桥接服务
+#
+# 用法：
+#   1. 复制本文件为 docker-compose.yml
+#   2. 准备 ./private/cove_token 与 ./private/netease_cookie
+#   3. 修改 NETEASE_INVITER_UID
+#   4. docker compose up -d
+#
+# 注意：Cove 需包含 netease_together_* 定制工具并启用 Bearer 验证，
+#       纯上游版本无法被本插件使用。
+
+name: astrbot-cove
+
+services:
+  cove:
+    image: cove-resonance:latest
+    build:
+      context: ./cove-resonance
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    init: true
+    read_only: true
+    environment:
+      NODE_ENV: production
+      TZ: Asia/Shanghai
+      PORT: "8787"
+      BRIDGE_TOKEN_FILE: /run/secrets/cove_token
+      NETEASE_COOKIE_FILE: /run/secrets/netease_cookie
+      NETEASE_INVITER_UID: "YOUR_NETEASE_UID"
+      TOGETHER_ENABLED: "true"
+      TOGETHER_AUTO_JOIN: "false"
+      TOGETHER_CHAT_EVENTS: "false"
+      TOGETHER_POLL_INTERVAL_MS: "4000"
+      TOGETHER_HEARTBEAT_INTERVAL_MS: "10000"
+    # 不映射端口：只允许 AstrBot 通过内网 Docker 网络访问
+    networks: [bot-network]
+    volumes:
+      - ./private:/run/secrets:ro
+      - ./state:/data:rw
+    tmpfs:
+      - /tmp:size=32m,mode=1777
+    mem_limit: 384m
+    memswap_limit: 512m
+    cpus: 0.5
+    pids_limit: 128
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    stop_signal: SIGTERM
+    stop_grace_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: 5m
+        max-file: "2"
+
+networks:
+  bot-network:
+    external: true
+    # 改成你 AstrBot 所在的 Docker 网络名，例如 astrbot_default
+    name: astrbot_default

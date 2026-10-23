@@ -1,0 +1,11 @@
+name: astrbot_plugin_netease_together
+display_name: 网易云一起听
+short_desc: 让 AstrBot 接入网易云双人「一起听」：读当前歌曲与歌词，并按明确授权暂停、切歌、退出。
+desc: 通过自建的 Cove 桥接服务接入网易云官方双人一起听。主人可在 QQ 私聊查看当前歌曲、读取完整歌词、搜索歌曲与歌单，并在明确授权下暂停、继续、切歌、插播与退出一起听。所有写操作都需要主人本轮直接发送的纯文字意图；引用、转发、群聊与定时任务一律不能授权。
+help: 发送 /一起听 查看全部指令；包括 状态、当前、歌词、搜索、歌单、加入、暂停、继续、下一首、切歌、下首、退出。
+version: v0.1.0
+author: HaruPuny
+repo: https://github.com/HaruPuny/astrbot_plugin_netease_together
+astrbot_version: ">=4.29.1,<5"
+support_platforms:
+  - aiocqhttp

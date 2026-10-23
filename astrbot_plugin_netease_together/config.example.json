@@ -1,0 +1,11 @@
+{
+  "enabled": false,
+  "platform_id": "",
+  "owner_umo": "",
+  "owner_netease_uid": "",
+  "bridge_url": "http://cove:8787/mcp/music",
+  "bridge_token_file": "/AstrBot/data/plugin_data/astrbot_plugin_netease_together/bridge-token",
+  "request_timeout_seconds": 25,
+  "max_lyrics_chars": 20000,
+  "command_display_chars": 3500
+}
